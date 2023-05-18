@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    .VerticalStackLoyut{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 15px;;
+        padding: 0;
+        
+    }
+    .HorizontalStackLoyut{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      
+    }
+    div{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .Button{
+        background-color: rgb(234, 0, 255);
+        padding: 15px;
+        margin: 15px;
+        border-radius: 15px;
+        font-size: 30px; 
+        color: white;
+        
+        text-align: center;
+    }
+    .Button:hover{
+        background-color: rgb(157, 2, 171);
+        padding: 12px;
+        margin: 18px;
+    }
+</style>
+
+</head>
+<body style="background-color: #2d2d2d;">
+    <div class="VerticalStackLoyut" >
+        <div class="HorizontalStackLoyut" >
+            <div class="VerticalStackLoyut">
+                <div style="font-size: 100px; " >🍔</div>
+                <div style="font-size: 30px; color: white; " >крабсбургер</div>
+                <div style=" background-color: white; width: 150px; height: 3px; margin: 10px; border-radius: 5px;" ></div>
+
+                <div style="font-size: 25px;color: white; " >1690тг</div>
+                <div class="Button" style="width: 140px;">
+                    Добавить
+                </div>
+            </div>
+
+            <div class="VerticalStackLoyut">
+                
+                <div style="font-size: 100px; " >🍔</div>
+                <div style="font-size: 25px;color: white; margin: -20px; background-color: rgb(234, 0, 255);  border-radius: 10px; padding: 5px; transform: translate(25px,-25px); " >3</div>
+                <div style="font-size: 30px; color: white; " >крабсбургер</div>
+                <div style=" background-color: white; width: 150px; height: 3px; margin: 10px; border-radius: 5px;" ></div>
+
+                <div style="font-size: 25px;color: white; " >1690тг</div>
+                <div class="Button" style="width: 140px; display: none;">
+                    Добавить
+                </div>
+
+                <div class="HorizontalStackLoyut">
+                    <div  style="width: 40px; height: 40; font-size: 35px;  " class="Button">
+                        +
+                    </div>
+                    
+                    <div  style="width: 40px; height: 40; font-size: 35px;  " class="Button">
+                        -
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
