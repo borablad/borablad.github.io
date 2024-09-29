@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <title>Лабораторная работа 3. Работа с формами</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], input[type="password"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="reset"] {
+            background-color: #ff4757;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        hr {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Лабораторная работа 3. Работа с формами в HTML</h1>
+    <p>Цель работы: научиться создавать и использовать формы</p>
+
+    <h2>Задание 1</h2>
+    <form action="#" method="post">
+        <!-- Фамилия -->
+        <label for="fam">Фамилия:</label>
+        <input type="text" id="fam" name="fam" required>
+
+        <!-- Имя -->
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+
+        <!-- Отчество -->
+        <label for="otch">Отчество:</label>
+        <input type="text" id="otch" name="otch" required>
+
+        <!-- Пароль -->
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required>
+
+        <!-- Число -->
+        <label for="chislo">Число:</label>
+        <select id="chislo" name="chislo">
+            <!-- Опции для чисел от 1 до 31 -->
+            <option value="1" selected>1</option>
+            <!-- Другие значения -->
+            <script>
+                for (let i = 2; i <= 31; i++) {
+                    document.write(`<option value="${i}">${i}</option>`);
+                }
+            </script>
+        </select>
+
+        <!-- Месяц -->
+        <label for="month">Месяц:</label>
+        <select id="month" name="month">
+            <option value="1" selected>январь</option>
+            <option value="2">февраль</option>
+            <option value="3">март</option>
+            <option value="4">апрель</option>
+            <option value="5">май</option>
+            <option value="6">июнь</option>
+            <option value="7">июль</option>
+            <option value="8">август</option>
+            <option value="9">сентябрь</option>
+            <option value="10">октябрь</option>
+            <option value="11">ноябрь</option>
+            <option value="12">декабрь</option>
+        </select>
+
+        <!-- Год -->
+        <label for="year">Год:</label>
+        <select id="year" name="year">
+            <option value="1976" selected>1976</option>
+            <option value="1977">1977</option>
+            <option value="1978">1978</option>
+            <option value="1979">1979</option>
+            <option value="1980">1980</option>
+            <option value="1981">1981</option>
+            <option value="1982">1982</option>
+            <option value="1983">1983</option>
+            <option value="1984">1984</option>
+            <option value="1985">1985</option>
+            <option value="1986">1986</option>
+        </select>
+
+        <!-- Пол -->
+        <label for="sex">Ваш пол:</label>
+        <select id="sex" name="sex">
+            <option value="man" selected>мужской</option>
+            <option value="woman">женский</option>
+        </select>
+
+        <!-- Нравится ли Вам информатика -->
+        <label>Нравится ли Вам информатика:</label>
+        <input type="radio" id="inf-yes" name="inf" value="yes" checked>
+        <label for="inf-yes">Да</label>
+        <input type="radio" id="inf-no" name="inf" value="no">
+        <label for="inf-no">Нет</label>
+        <input type="radio" id="inf-notsure" name="inf" value="notsure">
+        <label for="inf-notsure">Не уверен</label>
+
+        <!-- Интересы -->
+        <label>Что входит в Ваши интересы:</label>
+        <input type="checkbox" id="like-kino" name="like" value="kino">
+        <label for="like-kino">Кино</label>
+        <input type="checkbox" id="like-theatre" name="like" value="theatre">
+        <label for="like-theatre">Театр</label>
+        <input type="checkbox" id="like-music" name="like" value="music">
+        <label for="like-music">Музыка</label>
+        <input type="checkbox" id="like-sport" name="like" value="sport" checked>
+        <label for="like-sport">Спорт</label>
+
+        <!-- Кнопки -->
+        <button type="reset">Очистить</button>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <h2>Задание 2</h2>
+    <form action="server.php" method="post">
+        <!-- Фамилия -->
+        <label for="fam2">Фамилия:</label>
+        <input type="text" id="fam2" name="fam2" value="Иванов" required>
+
+        <!-- Имя -->
+        <label for="name2">Имя:</label>
+        <input type="text" id="name2" name="name2" value="Иван" required>
+
+        <!-- Отчество -->
+        <label for="otch2">Отчество:</label>
+        <input type="text" id="otch2" name="otch2" value="Иванович" required>
+
+        <!-- E-mail -->
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" value="ivanov@mail.com" required>
+
+        <!-- Страна -->
+        <label for="country">Выбор страны:</label>
+        <select id="country" name="country" required>
+            <option value="ru" selected>Россия</option>
+            <option value="us">США</option>
+            <option value="cn">Китай</option>
+            <option value="jp">Япония</option>
+            <option value="de">Германия</option>
+            <option value="fr">Франция</option>
+            <option value="it">Италия</option>
+            <option value="gb">Великобритания</option>
+            <option value="ca">Канада</option>
+            <option value="au">Австралия</option>
+        </select>
+
+        <!-- Город -->
+        <label>Выбор города:</label>
+        <input type="radio" id="moscow" name="city" value="moscow" checked>
+        <label for="moscow">Москва</label>
+        <input type="radio" id="newyork" name="city" value="newyork">
+        <label for="newyork">Нью-Йорк</label>
+        <input type="radio" id="paris" name="city" value="paris">
+        <label for="paris">Париж</label>
+        <input type="radio" id="beijing" name="city" value="beijing">
+        <label for="beijing">Пекин</label>
+        <input type="radio" id="tokyo" name="city" value="tokyo">
+        <label for="tokyo">Токио</label>
+
+        <!-- Языки -->
+        <label>Выбор языка:</label>
+        <input type="checkbox" id="lang-russian" name="lang1" value="russian" checked>
+        <label for="lang-russian">Русский</label>
+        <input type="checkbox" id="lang-english" name="lang2" value="english">
+        <label for="lang-english">Английский</label>
+        <input type="checkbox" id="lang-chinese" name="lang3" value="chinese">
+        <label for="lang-chinese">Китайский</label>
+        <input type="checkbox" id="lang-french" name="lang4" value="french">
+        <label for="lang-french">Французский</label>
+        <input type="checkbox" id="lang-japanese" name="lang5" value="japanese">
+        <label for="lang-japanese">Японский</label>
+
+        <!-- Профессии -->
+        <label for="profession">Выбор профессий:</label>
+        <select id="profession" name="profession[]" multiple>
+            <option value="engineer" selected>Инженер</option>
+            <option value="doctor">Врач</option>
+            <option value="teacher">Учитель</option>
+            <option value="developer">Программист</option>
+            <option value="designer">Дизайнер</option>
+            <option value="manager">Менеджер</option>
+            <option value="lawyer">Юрист</option>
+            <option value="scientist">Учёный</option>
+            <option value="journalist">Журналист</option>
+            <option value="artist">Художник</option>
+        </select>
+
+        <!-- Пароль -->
+        <label for="password2">Пароль:</label>
+        <input type="password" id="password2" name="password2" value="12345" required>
+
+        <!-- Дополнительная информация -->
+        <label for="info">Дополнительная информация:</label>
+        <textarea id="info" name="info" rows="5">Информация о себе...</textarea>
+
+        <!-- Кнопки -->
+        <button type="reset">Очистить форму</button>
+        <button type="submit">Загрузить информацию</button>
+    </form>
+
+    <h2>Контрольные вопросы</h2>
+    <ol>
+        <li>Назначение формы – это структурирование ввода данных от пользователя и отправка этих данных на сервер для обработки.</li>
+        <li>Элемент формы, служащий для ввода пароля – это <code>&lt;input type="password"&gt;</code>.</li>
+        <li>Элемент формы, служащий для создания меню – это <code>&lt;select&gt;</code> с вложенными <code>&lt;option&gt;</code>.</li>
+    </ol>
+</body>
+</html>
