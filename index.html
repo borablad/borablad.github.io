@@ -1,48 +1,664 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Задания</title>
-    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Резюме и портфолио — Борислав Жоголев. Fullstack / .NET / Mobile / IoT." />
+  <title>Борислав Жоголев — резюме и портфолио</title>
+
+  <style>
+    :root{
+      --bg0:#f6f8ff;
+      --bg1:#ffffff;
+      --ink:#0b1220;
+      --muted:#5a677a;
+      --line:rgba(15, 23, 42, .10);
+
+      --blue:#2f6bff;
+      --blue2:#57a5ff;
+      --cyan:#56f0ff;
+
+      --card:rgba(255,255,255,.72);
+      --shadow: 0 18px 50px rgba(14, 30, 62, .12);
+      --shadow2: 0 8px 18px rgba(14, 30, 62, .10);
+
+      --r16:16px;
+      --r22:22px;
+      --max:1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 12% 8%, rgba(47,107,255,.18), transparent 55%),
+        radial-gradient(1000px 600px at 85% 12%, rgba(86,240,255,.16), transparent 52%),
+        radial-gradient(900px 600px at 65% 90%, rgba(87,165,255,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg0), #fbfcff 60%, var(--bg1));
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    a:hover{ text-decoration:underline; }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding: 0 18px; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(246,248,255,.60);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar__in{
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 10px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      min-width: 240px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 0 0 4px rgba(47,107,255,.10);
+    }
+    .brand b{ font-size:14px; letter-spacing:.2px; }
+    .brand span{ color:var(--muted); font-size:12px; display:block; margin-top:1px; }
+
+    .nav{
+      display:flex; gap:14px; flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav a{
+      font-size:13px;
+      color: rgba(11,18,32,.78);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+    .nav a:hover{
+      text-decoration:none;
+      border-color: var(--line);
+      background: rgba(255,255,255,.55);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      box-shadow: var(--shadow2);
+      font-size: 13px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btnPrimary{
+      border-color: rgba(47,107,255,.35);
+      background: linear-gradient(135deg, rgba(47,107,255,.14), rgba(86,240,255,.12));
+    }
+
+    /* Hero */
+    .hero{
+      padding: 46px 0 22px;
+    }
+    .hero__grid{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    .card{
+      border: 1px solid var(--line);
+      border-radius: var(--r22);
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+    .heroMain{ padding: 22px; position:relative; overflow:hidden; }
+    .heroMain:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(650px 260px at 30% 0%, rgba(47,107,255,.22), transparent 65%),
+        radial-gradient(520px 280px at 85% 10%, rgba(86,240,255,.20), transparent 62%);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .heroMain > *{ position:relative; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-size: 12px;
+      color: rgba(11,18,32,.78);
+      padding: 6px 10px;
+      border-radius:999px;
+      border: 1px solid rgba(47,107,255,.20);
+      background: rgba(255,255,255,.55);
+    }
+    h1{
+      margin: 12px 0 8px;
+      font-size: 34px;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.55;
+      max-width: 64ch;
+    }
+    .actions{
+      margin-top: 16px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    .heroSide{ padding: 18px; display:flex; flex-direction:column; gap:12px; }
+    .miniTitle{ font-size: 12px; color: rgba(11,18,32,.72); margin: 2px 0 6px; }
+    .row{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .pill{
+      display:inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      font-size: 12px;
+      color: rgba(11,18,32,.78);
+      white-space:nowrap;
+    }
+    .list{
+      display:grid; gap:8px;
+      margin: 0;
+      padding: 0;
+      list-style:none;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--r16);
+      background: rgba(255,255,255,.60);
+    }
+    .li b{ font-size: 13px; }
+    .li span{ display:block; color:var(--muted); font-size:12px; margin-top:2px; line-height:1.35; }
+    .ico{
+      width: 10px; height: 10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      margin-top:4px;
+      flex:0 0 auto;
+    }
+
+    /* Sections */
+    section{ padding: 18px 0; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:10px;
+      margin: 2px 0 10px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .block{ padding: 16px; }
+    .block p{ margin:0; color:var(--muted); font-size: 13px; line-height:1.6; }
+
+    /* Timeline */
+    .timeline{ padding: 0; margin:0; list-style:none; display:grid; gap:10px; }
+    .job{
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--r22);
+      background: rgba(255,255,255,.62);
+    }
+    .jobHead{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
+    }
+    .jobHead b{ font-size: 14px; }
+    .jobHead .meta{ color:var(--muted); font-size: 12px; }
+    .job ul{ margin: 10px 0 0; padding-left: 18px; }
+    .job li{ color: rgba(11,18,32,.80); font-size: 13px; line-height:1.55; margin: 6px 0; }
+    .tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 10px; }
+    .tag{
+      font-size: 11px;
+      color: rgba(11,18,32,.78);
+      border: 1px solid rgba(47,107,255,.18);
+      background: rgba(47,107,255,.08);
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+
+    /* Projects */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .proj{
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--r22);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow2);
+      display:flex; flex-direction:column; gap:10px;
+      min-height: 170px;
+    }
+    .proj h3{ margin:0; font-size: 14px; }
+    .proj p{ margin:0; color:var(--muted); font-size: 12px; line-height:1.55; }
+    .proj .links{ margin-top:auto; display:flex; gap:10px; flex-wrap:wrap; }
+    .link{
+      font-size: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      text-decoration:none;
+    }
+    .link:hover{ text-decoration:none; border-color: rgba(47,107,255,.35); }
+
+    /* Footer */
+    footer{
+      padding: 22px 0 34px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .foot{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; flex-wrap:wrap;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero__grid{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+    }
+    @media (max-width: 620px){
+      h1{ font-size: 28px; }
+      .cards{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+
+    /* Print (optional) */
+    @media print{
+      .topbar{ position:static; background:white; border:none; }
+      .btn, .nav{ display:none !important; }
+      body{ background:white; }
+      .card{ box-shadow:none; background:white; }
+    }
+  </style>
 </head>
+
 <body>
-    <header style="background-color: #000; height: 50px;"><a style="color: #f9f002; font-size: 2rem;">Список Заданий</a></header>
-<section class="cyberpunk">
-  <a      class="cyberpunk"        href="./Task1.html" >Задание 1 (Текстовое оформление)_</a>
-  <button class="cyberpunk green" ><a href="./tsk2/index.html"> Задание 2 (Landing)_ </a></button>
-  <a      class="cyberpunk purple" href="./Task3.html" >Задание 3 (Учебная форма)/(Форма интернет магазина)_</a>
-  <!-- <button class="cyberpunk blue"  ><a href="./Task4.html">Задание 3 (Форма интернет магазина)_</button> -->
-  <a      class="cyberpunk purple" href="#" >Задание 4 (CSS)_</a>
-  <button class="cyberpunk blue"  ><a href="./Task6.html">Задание 5 (пыха)_</button>
-
-</section>
-<section class="cyberpunk black both">
-  <!-- <h1 class="cyberpunk">H1 title</h1>
-  <h1 class="cyberpunk glitched">H1 title glitched</h1>
-  <h2 class="cyberpunk">H2 title</h2>
-  <h2 class="cyberpunk glitched">H2 title glitched</h2>
-  <h3 class="cyberpunk">H3 title</h3>
-  <h3 class="cyberpunk glitched">H3 title glitched</h3>
-  <h4 class="cyberpunk">H4 title</h4>
-  <h4 class="cyberpunk glitched">H4 title glitched</h4> -->
-  <hr class="cyberpunk" />
-  <p>Жоголев Борислав  /  ВТиПО 23(3)-1</p>
-  <hr class="cyberpunk glitched" />
-</section>
-
-<footer style="background-color: #000; height: 50px;"></footer>
-    <!-- <div class="container">
-        <h1>Список Заданий</h1>
-        <div class="neon-box">
-            <a href="./Task1.html" target="_blank">Задание 1 (Текстовое оформление)</a><br>
-            <a href="./Task2.html" target="_blank">Задание 2 (Landing)</a><br>
-            <a href="./Task3.html" target="_blank">Задание 3 (Учебная форма)</a><br>
-            <a href="./Task4.html" target="_blank">Задание 3 (Форма интернет магазина)</a><br>
-            <a href="./Task5.html" target="_blank">Задание 4 (CSS)</a><br>
+  <header class="topbar">
+    <div class="wrap topbar__in">
+      <div class="brand">
+        <div class="dot"></div>
+        <div>
+          <b>Борислав Жоголев</b>
+          <span>Fullstack • .NET • Mobile • IoT</span>
         </div>
-    </div> -->
+      </div>
+
+      <nav class="nav" aria-label="Навигация">
+        <a href="#about">Обо мне</a>
+        <a href="#experience">Опыт</a>
+        <a href="#projects">Портфолио</a>
+        <a href="#skills">Навыки</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btnPrimary" href="#contacts">Связаться</a>
+        <!-- Если положишь pdf рядом как resume.pdf — кнопка будет работать -->
+        <a class="btn" href="resume.pdf" download>Скачать PDF</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="top">
+      <div class="hero__grid">
+        <div class="card heroMain">
+          <div class="kicker">Алматы • удалённо/гибрид • готов к переезду в Москву</div>
+          <h1>Fullstack разработчик<br/>с сильным .NET + опытом мобильных и интеграций</h1>
+          <p class="sub">
+            Разрабатываю прикладные продукты: кассы/POS, интеграции с платежами, отчёты, админ-панели, мобильные приложения и прототипы IoT.
+            Быстро вхожу в легаси (Delphi/Firebird/MS SQL) и довожу до стабильной работы.
+          </p>
+          <div class="actions">
+            <a class="btn btnPrimary" href="#projects">Посмотреть портфолио</a>
+            <a class="btn" href="#experience">Открыть опыт</a>
+          </div>
+        </div>
+
+        <aside class="card heroSide">
+          <div>
+            <div class="miniTitle">Контакты</div>
+            <ul class="list">
+              <li class="li"><span class="ico"></span><div><b>Телефон</b><span>+7 (747) 629 98 22</span></div></li>
+              <li class="li"><span class="ico"></span><div><b>Email</b><span><a href="mailto:zogolevbris@gmail.com">zogolevbris@gmail.com</a></span></div></li>
+              <li class="li"><span class="ico"></span><div><b>Telegram</b><span><a href="https://t.me/Bora_blad" target="_blank" rel="noreferrer">@Bora_blad</a></span></div></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="miniTitle">Фокус</div>
+            <div class="row" style="flex-wrap:wrap;">
+              <span class="pill">POS / кассы</span>
+              <span class="pill">API / интеграции</span>
+              <span class="pill">Mobile</span>
+              <span class="pill">IoT / прототипы</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>Обо мне</h2>
+        <p>коротко и по делу</p>
+      </div>
+      <div class="card block">
+        <p>
+          Я программист-разработчик: спокойно работаю с разными стеками — от .NET/WinForms и мобильных (MAUI/Xamarin) до Python/FastAPI и IoT (ESP32/STM32).
+          Люблю понятную архитектуру, стабильность в проде и аккуратные интеграции (REST/JSON/JWT).
+        </p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sectionTitle">
+        <h2>Опыт</h2>
+        <p>3+ года коммерции</p>
+      </div>
+
+      <ul class="timeline">
+        <li class="job">
+          <div class="jobHead">
+            <div>
+              <b>Aqniet Group — Delphi / C# / .NET Developer</b>
+              <div class="meta">Ноябрь 2024 — настоящее время • Алматы</div>
+            </div>
+            <div class="tags">
+              <span class="tag">Delphi 7/XE</span>
+              <span class="tag">WinForms</span>
+              <span class="tag">EF</span>
+              <span class="tag">MS SQL</span>
+              <span class="tag">MariaDB/Firebird</span>
+              <span class="tag">REST/JWT</span>
+              <span class="tag">Kaspi/Halyk</span>
+            </div>
+          </div>
+          <ul>
+            <li>Поддержка и отладка легаси POS на Delphi, устранение расхождений транзакций с Kaspi Pay / Halyk POS.</li>
+            <li>Разработка универсальной кассы на C#/.NET: UI, бизнес-логика, обработка чеков и платежей.</li>
+            <li>Интеграции с внешними сервисами (эквайринг, сертификаты, отчёты) через REST/JSON/JWT.</li>
+            <li>Разбор кассового модуля Microsoft Dynamics AX 2012 (обмен/структуры данных).</li>
+          </ul>
+        </li>
+
+        <li class="job">
+          <div class="jobHead">
+            <div>
+              <b>Фриланс — Full-stack Developer</b>
+              <div class="meta">Май 2024 — Сентябрь 2024</div>
+            </div>
+            <div class="tags">
+              <span class="tag">React/Next</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Docker</span>
+              <span class="tag">PostgreSQL/MongoDB</span>
+            </div>
+          </div>
+          <ul>
+            <li>Веб-интерфейсы/админки/лендинги на React/Next.js, интеграции с API.</li>
+            <li>API на FastAPI/SQLAlchemy, авторизация JWT, контейнеризация Docker.</li>
+          </ul>
+        </li>
+
+        <li class="job">
+          <div class="jobHead">
+            <div>
+              <b>gosu — Full-stack / Mobile / IoT Developer</b>
+              <div class="meta">Март 2022 — Март 2024</div>
+            </div>
+            <div class="tags">
+              <span class="tag">MAUI/Xamarin</span>
+              <span class="tag">ASP.NET Core</span>
+              <span class="tag">SQLite/Realm</span>
+              <span class="tag">ESP32/STM32</span>
+              <span class="tag">CI/CD</span>
+            </div>
+          </div>
+          <ul>
+            <li>Кроссплатформенная мобильная разработка (iOS/Android), офлайн-режим, синхронизация.</li>
+            <li>Backend на ASP.NET Core / Python FastAPI, интеграции и обмен с учётными системами.</li>
+            <li>IoT-прототипирование: ESP32/STM32/Arduino, датчики, телеметрия.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <div class="sectionTitle">
+        <h2>Портфолио</h2>
+        <p>выбрал то, что лучше всего продаёт тебя</p>
+      </div>
+
+      <div class="cards">
+        <article class="proj">
+          <h3>Универсальная касса / POS (.NET WinForms)</h3>
+          <p>Продажи, чеки, оплаты, работа с БД, отчёты. Интеграция с Kaspi/Halyk терминалами.</p>
+          <div class="tags">
+            <span class="tag">C#</span><span class="tag">WinForms</span><span class="tag">EF</span><span class="tag">MS SQL/MariaDB</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">GitHub (если есть)</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Скрины/видео</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>Guester — ERP/учёт для клиентов (Узбекистан)</h3>
+          <p>Собственная ERP: роли/доступы, справочники, операции, отчётность, интеграции.</p>
+          <div class="tags">
+            <span class="tag">Web</span><span class="tag">API</span><span class="tag">DB</span><span class="tag">Auth</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Описание</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Демо (если можно)</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>Vedora — мобильное приложение</h3>
+          <p>Мобильная разработка (MAUI/Xamarin): офлайн, кеш, синхронизация, API.</p>
+          <div class="tags">
+            <span class="tag">.NET MAUI</span><span class="tag">Xamarin</span><span class="tag">SQLite/Realm</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Google Play/App Store</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Скрины</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>ТCД (терминал сбора данных) / склад</h3>
+          <p>Сканирование, учёт операций, работа в офлайне, синхронизация с сервером/1С-шлюзом.</p>
+          <div class="tags">
+            <span class="tag">Mobile</span><span class="tag">Offline</span><span class="tag">REST</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Описание</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Видео</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>Плагин iiko.Front: сертификаты</h3>
+          <p>Добавление скидок/оплаты сертификатом, проверка действительности по API, работа с JWT.</p>
+          <div class="tags">
+            <span class="tag">C#</span><span class="tag">iiko API</span><span class="tag">JWT</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Кейс</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Тех. описание</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <h3>IoT прототипы</h3>
+          <p>ESP32/STM32/Arduino: датчики, дисплеи, UART/SPI/I2C, телеметрия в приложения.</p>
+          <div class="tags">
+            <span class="tag">ESP32</span><span class="tag">STM32</span><span class="tag">Embedded</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" onclick="return openPlaceholder(event)">Фото/схемы</a>
+            <a class="link" href="#" onclick="return openPlaceholder(event)">GitHub</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="card block" style="margin-top:12px;">
+        <p>
+          ⚙️ Подсказка: лучше всего конвертить проекты, если в каждой карточке есть:
+          <b>1)</b> задача/контекст, <b>2)</b> твой вклад, <b>3)</b> стек, <b>4)</b> результат (цифры/эффект), <b>5)</b> ссылки (код/видео/скрины).
+        </p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sectionTitle">
+        <h2>Навыки</h2>
+        <p>по резюме + самое важное</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card block">
+          <div class="miniTitle">Основной стек</div>
+          <div class="tags">
+            <span class="tag">C# / .NET Framework</span>
+            <span class="tag">ASP.NET Core</span>
+            <span class="tag">WinForms</span>
+            <span class="tag">Entity Framework</span>
+            <span class="tag">MS SQL / MariaDB / Firebird</span>
+            <span class="tag">REST / JSON / JWT</span>
+          </div>
+          <div class="miniTitle" style="margin-top:12px;">Веб / Backend</div>
+          <div class="tags">
+            <span class="tag">React / Next.js</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">WebSockets</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+
+        <div class="card block">
+          <div class="miniTitle">Mobile / IoT</div>
+          <div class="tags">
+            <span class="tag">.NET MAUI</span>
+            <span class="tag">Xamarin.Forms</span>
+            <span class="tag">SQLite / Realm</span>
+            <span class="tag">Android / iOS</span>
+            <span class="tag">ESP32</span>
+            <span class="tag">STM32</span>
+            <span class="tag">UART / SPI / I2C</span>
+          </div>
+
+          <div class="miniTitle" style="margin-top:12px;">Языки</div>
+          <div class="tags">
+            <span class="tag">Русский — родной</span>
+            <span class="tag">English — B1</span>
+            <span class="tag">Қазақша — A1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="sectionTitle">
+        <h2>Контакты</h2>
+        <p>быстро связаться</p>
+      </div>
+
+      <div class="card block">
+        <div class="grid2" style="align-items:start;">
+          <div>
+            <p style="margin-bottom:10px;">
+              <b>Телефон:</b> +7 (747) 629 98 22<br/>
+              <b>Email:</b> <a href="mailto:zogolevbris@gmail.com">zogolevbris@gmail.com</a><br/>
+              <b>Telegram:</b> <a href="https://t.me/Bora_blad" target="_blank" rel="noreferrer">@Bora_blad</a><br/>
+              <b>Локация:</b> Алматы (готов к переезду в Москву)
+            </p>
+
+            <div class="actions">
+              <a class="btn btnPrimary" href="mailto:zogolevbris@gmail.com?subject=Вакансия%20для%20Борислава%20Жоголева">Написать на почту</a>
+              <a class="btn" href="https://t.me/Bora_blad" target="_blank" rel="noreferrer">Написать в Telegram</a>
+            </div>
+          </div>
+
+          <div>
+            <p style="margin-bottom:10px;">
+              Если хочешь — добавлю блок <b>“Для рекрутера”</b>: 3 строки “что ищу / какой формат / когда готов выйти”.
+              Это сильно повышает отклик.
+            </p>
+            <div class="actions">
+              <a class="btn" href="#top">Наверх</a>
+              <a class="btn" href="resume.pdf" download>PDF резюме</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> Борислав Жоголев</div>
+        <div style="opacity:.9;">Сделано как одностраничная визитка • “air + blue” стиль</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    function openPlaceholder(e){
+      e.preventDefault();
+      alert("Тут поставим реальную ссылку (GitHub/видео/скриншоты/демо). Скажи — и я подставлю.");
+      return false;
+    }
+  </script>
 </body>
 </html>
+
